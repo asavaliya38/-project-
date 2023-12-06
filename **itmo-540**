@@ -29,11 +29,11 @@ Internet Protocol Version 4
 1. What is the first phase of the DHCP process?  
 i. Discover
 1. What would be the source IP in the Network layer of this packet?  
-i. Source IP: XXX.XXX.XXX.XXX
+i. 0.0.0.0
 1. Explain your previous answer.  
 i. The source IP address is the address of the computer (Computer A in this case) that is sending the DHCP Discover packet.
 1. What is the destination IP address in the Network Layer of this packet?  
-i. Destination IP: XXX.XXX.XXX.XXX
+i. Destination IP: 255.255.255.255
 1. Explain your previous answer.  
 i. The destination IP address is the address of the DHCP server that will receive and process the DHCP Discover packet.
 
@@ -48,7 +48,7 @@ Dynamic Host Configuration Protocol (Discover)
     Option: (61) Client identifier
         Length: 7
         Hardware type: Ethernet (0x01)
-        Client MAC address: XXX.XXX.XXX.XXX
+        Client MAC address: B4:74:9F:88:4E:43
     Option: (50) Requested IP Address
         Length: 4
         Requested IP Address: 192.168.1.10  <-- take note of this IP address, you will need it in later DHCP phases.
@@ -67,10 +67,10 @@ Dynamic Host Configuration Protocol (Offer)
     Option: (61) Client identifier
         Length: 7
         Hardware type: Ethernet (0x01)
-        Client MAC address: XXXXXXXXXXXXXXXXXXX
+        Client MAC address: B4:74:9F:88:4E:43
     Option: (54) DHCP Server Identifier
         Length: 4
-        DHCP Server Identifier: XXX.XXX.XXX.XXX
+        DHCP Server Identifier: 192.168.1.3
     Option: (51) IP Address Lease Time
         Length: 4
         IP Address Lease Time: (86400s) 1 day
@@ -106,13 +106,13 @@ Dynamic Host Configuration Protocol (Request)
     Option: (61) Client identifier
         Length: 7
         Hardware type: Ethernet (0x01)
-        Client MAC address: XX:XX:XX:XX:XX:XX
+        Client MAC address:  B4:74:9F:88:4E:43
     Option: (50) Requested IP Address
         Length: 4
         Requested IP Address: XXX.XXX.XXX.XXX
     Option: (54) DHCP Server Identifier
         Length: 4
-        DHCP Server Identifier: XXX.XXX.XXX.XXX
+        DHCP Server Identifier: 192.168.1.3
     Option: (12) Host Name
         Length: 13
         Host Name: lenovo-laptop
@@ -315,23 +315,23 @@ i. Status Code: 200 (OK), indicates a successful request.
 Based on the three networks detailed - create a forwarding table that includes prefix and output port by updating the table below - use the information from the Readme.md file for reference. Add your values to the chart below.
 
 | Network Prefix | Output Port |
-| -------------- | ----------- |
-| - | - |
-| - | - |
-| - | - |
+| 192.168.1.0/24 | 0 |
+| 192.168.2.0/24 | 1 |
+| 192.168.3.0/24 | 2 |
+| 172.16.0.0/16 | 3 |
 | *otherwise* | 3 |
 
 On the Netflix Router complete the forwarding table
 
 | Network Prefix | Output Port |
-| -------------- | ----------- |
-| - | - |
+| 172.16.0.0/16 | 3 |
+| 172.16.0.0/16 | 3 |
 | *otherwise* | 3 |
 
 If you make an HTTP request from Computer A in the ITM Network to Computer A in the Netflix Network, http://netflix.com:
 
 1. Which Output Port Interface will your packet be forwarded to on the School Network Router?  
-i. Output Port Interface: 1
+i. Output Port Interface: 3
 1. For the TCP packet returning the ACK from Computer A in the Netflix Network to Computer A, which Output Port Interface will your packet be forwarded to on the School Router?  
 i. Output Port Interface: 3
 1. A HTTP request is sent from Computer A in the ITM network, for the IP address of 192.168.5.5. When this packet hits the router - explain what will happen?  
